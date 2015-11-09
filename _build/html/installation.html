@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>First Steps with Sphinx &mdash; Sphinx Documentation Instructions 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Sphinx Documentation Instructions 0.1.1 documentation" href="index.html" />
+    <link rel="next" title="Adding Content" href="adding_content.html" />
+    <link rel="prev" title="Welcome to Django’s documentation!" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="first-steps-with-sphinx">
+<h1>First Steps with Sphinx<a class="headerlink" href="#first-steps-with-sphinx" title="Permalink to this headline">¶</a></h1>
+<p>This document is meant to give a tutorial-like overview of all common tasks
+while using Sphinx.</p>
+<p>The green arrows designate &#8220;more info&#8221; links leading to advanced sections about
+the described task.</p>
+<div class="section" id="install-sphinx">
+<h2>Install Sphinx<a class="headerlink" href="#install-sphinx" title="Permalink to this headline">¶</a></h2>
+<p>Install Sphinx, either from a distribution package or from
+<a class="reference external" href="https://pypi.python.org/pypi/Sphinx">PyPI</a> with</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ pip install Sphinx
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-the-documentation-sources">
+<h2>Setting up the Documentation Sources<a class="headerlink" href="#setting-up-the-documentation-sources" title="Permalink to this headline">¶</a></h2>
+<p>The root directory of a Sphinx collection of reStructuredText document sources
+is called the <span class="xref std std-term">source directory</span>.  This directory also contains the Sphinx
+configuration file <code class="file docutils literal"><span class="pre">conf.py</span></code>, where you can configure all aspects of how
+Sphinx reads your sources and builds your documentation.  <a href="#id4"><span class="problematic" id="id5"><span id="id1"></span>[#]_</span></a></p>
+<p>Sphinx comes with a script called <strong class="program">sphinx-quickstart</strong> that sets up a
+source directory and creates a default <code class="file docutils literal"><span class="pre">conf.py</span></code> with the most useful
+configuration values from a few questions it asks you.  Just run</p>
+<div class="highlight-rst"><div class="highlight"><pre>$ sphinx-quickstart
+</pre></div>
+</div>
+<p>and answer its questions.  (Be sure to say yes to the &#8220;autodoc&#8221; extension.)</p>
+<p>There is also an automatic &#8220;API documentation&#8221; generator called
+<strong class="program">sphinx-apidoc</strong>; see <span class="xref std std-ref">invocation-apidoc</span> for details.</p>
+</div>
+<div class="section" id="defining-document-structure">
+<h2>Defining document structure<a class="headerlink" href="#defining-document-structure" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s assume you&#8217;ve run <strong class="program">sphinx-quickstart</strong>.  It created a source
+directory with <code class="file docutils literal"><span class="pre">conf.py</span></code> and a master document, <code class="file docutils literal"><span class="pre">index.rst</span></code> (if you
+accepted the defaults).  The main function of the <span class="xref std std-term">master document</span> is to
+serve as a welcome page, and to contain the root of the &#8220;table of contents tree&#8221;
+(or <em>toctree</em>).  This is one of the main things that Sphinx adds to
+reStructuredText, a way to connect multiple files to a single hierarchy of
+documents.</p>
+<div class="sidebar">
+<p class="first sidebar-title">reStructuredText directives</p>
+<p><code class="docutils literal"><span class="pre">toctree</span></code> is a reStructuredText <em class="dfn">directive</em>, a very versatile piece of
+markup.  Directives can have arguments, options and content.</p>
+<p><em>Arguments</em> are given directly after the double colon following the
+directive&#8217;s name.  Each directive decides whether it can have arguments, and
+how many.</p>
+<p><em>Options</em> are given after the arguments, in form of a &#8220;field list&#8221;.  The
+<code class="docutils literal"><span class="pre">maxdepth</span></code> is such an option for the <code class="docutils literal"><span class="pre">toctree</span></code> directive.</p>
+<p><em>Content</em> follows the options or arguments after a blank line.  Each
+directive decides whether to allow content, and what to do with it.</p>
+<p class="last">A common gotcha with directives is that <strong>the first line of the content must
+be indented to the same level as the options are</strong>.</p>
+</div>
+<p>The toctree directive initially is empty, and looks like this:</p>
+<div class="highlight-rst"><div class="highlight"><pre><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> <span class="nf">2</span>
+</pre></div>
+</div>
+<p>You add documents listing them in the <em>content</em> of the directive:</p>
+<div class="highlight-rst"><div class="highlight"><pre><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> <span class="nf">2</span>
+
+   intro
+   tutorial
+<span class="cp">   ...</span>
+</pre></div>
+</div>
+<p>This is exactly how the toctree for this documentation looks.  The documents to
+include are given as <span class="xref std std-term">document name</span>s, which in short means that you
+leave off the file name extension and use slashes as directory separators.</p>
+<p><a href="#id2"><span class="problematic" id="id3">|more|</span></a> Read more about <span class="xref std std-ref">the toctree directive</span>.</p>
+<p>You can now create the files you listed in the toctree and add content, and
+their section titles will be inserted (up to the &#8220;maxdepth&#8221; level) at the place
+where the toctree directive is placed.  Also, Sphinx now knows about the order
+and hierarchy of your documents.  (They may contain <code class="docutils literal"><span class="pre">toctree</span></code> directives
+themselves, which means you can create deeply nested hierarchies if necessary.)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">First Steps with Sphinx</a><ul>
+<li><a class="reference internal" href="#install-sphinx">Install Sphinx</a></li>
+<li><a class="reference internal" href="#setting-up-the-documentation-sources">Setting up the Documentation Sources</a></li>
+<li><a class="reference internal" href="#defining-document-structure">Defining document structure</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Django&#8217;s documentation!</a></li>
+      <li>Next: <a href="adding_content.html" title="next chapter">Adding Content</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Shivam Goyal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/installation.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
