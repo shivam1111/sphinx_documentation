@@ -1,0 +1,19 @@
+.. highlight:: rst
+
+Create Virtual Environment Directory
+====================================
+
+To create a virtual environment directory::
+	`virtualenv <directory name>`
+
+Activate the Virtual Environment
+================================
+
+Go into the created Virtual Environment Directory and type ::
+	source bin/activate
+
+Deactivate the activated virtual environment 
+============================================
+
+Go into the activated virtual environment directory and type ::
+	deactivate
